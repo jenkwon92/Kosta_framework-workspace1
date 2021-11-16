@@ -4,7 +4,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import model.TicketService;
 
-public class TestCustomer2_ioc {
+public class TestCustomer2_IOC {
 	public static void main(String[] args) {
 		//기존 제어방식 : 필요한 컴포넌트를 생성해서 사용
 		//AsianaTicketService service = new AsianaTicketService();
@@ -16,6 +16,8 @@ public class TestCustomer2_ioc {
 		//의존하는 컴포넌트를 변경하기 위해서는 사용하는 측의 코드 영역에 변화는 불가피하다
 
 		//IOC 적용 -> 결합도를 느슨하게 한다
+		//구체적인 항공사가 변경되어도 (컴포넌트(bean)가 변경되어도 사용하는 측에서는 변경 필요 x)
+		//외부 영향이 최소화된다
 	    //1. 대상 컴포넌트들의 계층구조를 형성 : 인터페이스 TicketService 추상메서드 ticketing()
 		//2.spring 설정(ioc.xml)을 통해 spring ioc container 에게 컴포넌트 bean 생성할 것을 명시
 		

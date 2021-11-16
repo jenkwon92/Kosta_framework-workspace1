@@ -1,6 +1,6 @@
 package model;
 
-public class AsianaTicketService implements TicketService{
+public class AsianaTicketServiceImpl implements TicketService{
 	public void asianaTicketing() {
 		System.out.println("아시아나 티켓팅하다");
 	}

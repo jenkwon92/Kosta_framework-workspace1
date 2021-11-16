@@ -2,6 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-<bean id="ticket" class="model.KalTicketServiceImpl"></bean>
-
+<bean id="memberDAO" class="model.MemberDAOImpl"></bean>
+<bean id="memberService" class="model.MemberServiceImplVer2">
+	<constructor-arg>
+		<ref bean="memberDAO"/>
+	</constructor-arg>
+</bean>
 </beans>
