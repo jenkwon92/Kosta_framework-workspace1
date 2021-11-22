@@ -4,8 +4,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 <bean id="memberDAO" class="model.MemberDAOImplVer2"></bean>
 <bean id="memberService" class="model.MemberServiceImpl">
-	<constructor-arg>
-		<ref bean="memberDAO"/>
+	<constructor-arg> <!-- constructor-arg를 통한 의존주입 -->
+		<ref bean="memberDAO"/> <!-- 빈(객체)를 주입 (전달)받는 경우 ref / 기본 데이터 타입이나 String 타입이라면 	value -->
 	</constructor-arg>
 </bean>
 </beans>
