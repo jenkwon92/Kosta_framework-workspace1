@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+<bean id="personService" class="org.kosta.model.PersonService"></bean>
+<bean id="productService" class="org.kosta.model.ProductService"></bean>
+<!-- aop 설정 -->
+<bean id="aroundLoggingService" class="org.kosta.aop.AroundLoggingService"></bean>
+<aop:config>
+	<aop:aspect ref="aroundLoggingService">
+		<!-- pointcut 적용대상을 지정, within은 해당 패키지 하위 모든 클래스의 메서드가 적용대상 -->
+		<aop:pointcut expression="within(org.kosta.model.*)" id="pt"/>
+		<aop:around method="aroundLogging" pointcut-ref="pt"/>
+	</aop:aspect>
+</aop:config>
+</beans>

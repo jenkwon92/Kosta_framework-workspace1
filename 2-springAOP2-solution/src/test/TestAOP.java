@@ -1,5 +1,6 @@
 package test;
 
+import org.kosta.community.NoticeCommunityService;
 import org.kosta.model.member.MemberService;
 import org.kosta.model.product.ProductService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -40,12 +41,22 @@ public class TestAOP {
 		ClassPathXmlApplicationContext factory=new ClassPathXmlApplicationContext("spring-config.xml");
 		MemberService ms=(MemberService)factory.getBean("memberService");
 		ProductService ps=(ProductService)factory.getBean("productService");
+		//AOP를 적용하지 않은 상태에서는 org.kosta.model.memeber.MemberServiceImpl가 출력
+		//AOP를 적용한 상태에서는 com.sun.proxy.$Proxy2가 출력
+		//AOP 적용시 객체는 실제 Core 타겟 객체(MemberServiceImpl)가아닌 Proxy(대리인) 객체가 스프링 컨테이너에 의해
+		//반환되어 실행된다
+		System.out.println(ms.getClass().getName());
+		System.out.println(ps.getClass().getName());
 		ms.findMemberById();
 		ms.registerMember();
 		ms.findMemberListByAddress();
 		ps.deleteProduct();
 		ps.findProductById();
 		ps.findProductListByMaker();
+		//신규 서비스 추가
+		NoticeCommunityService ns = (NoticeCommunityService)factory.getBean("noticeCommunityService");
+		ns.findNotice();
+		ns.findNoticeList();
 		factory.close();
 	}
 }

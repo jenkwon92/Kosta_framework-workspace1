@@ -3,17 +3,23 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 <bean id="memberService" class="org.kosta.model.member.MemberServiceImpl"></bean>
 <bean id="productService" class="org.kosta.model.product.ProductServiceImpl"></bean>
+<bean id="noticeCommunityService" class="org.kosta.model.community.NoticeCommunityServiceImpl"></bean>
 <!-- AOP 설정 -->
 <bean id="timeLoggingService" class="org.kosta.aop.common.TimeLoggingService"></bean>
 <aop:config>
-   <aop:aspect ref="timeLoggingService">
-      <!-- pointcut : aop 적용대상을 지정 -->
-      <aop:pointcut expression="execution(* org.kosta.model..*Service.find*(..))" id="pt"/>
-      <!-- advice : 공통기능(cross cutting concern)을 어느 시점에 적용하느냐를 지정 -->
-      <aop:before method="logging" pointcut-ref="pt"/>
-   </aop:aspect>
+	<aop:aspect ref="timeLoggingService">
+		<!-- pointcut : aop 적용대상을 지정  -->
+		<aop:pointcut expression="execution(* org.kosta.model..*Service.find*(..))" id="pt"/>
+		<!-- advice : 공통기능(cross cutting concern)을 어느 시점에 적용하느냐를 지정  -->
+		<aop:after method="logging" pointcut-ref="pt"/>
+	</aop:aspect>
 </aop:config>
 </beans>
+
+
+
+
+

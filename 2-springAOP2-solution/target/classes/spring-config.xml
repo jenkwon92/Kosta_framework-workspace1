@@ -9,9 +9,11 @@
 <!-- AOP 설정 -->
 <bean id="timeLoggingService" class="org.kosta.aop.common.TimeLoggingService"></bean>
 <aop:config>
-	<aop:aspect ref="timeLoggingService">
-		<!-- pointcut : aop 적용대상을 지정 -->
-		<aop:pointcut expression="execution(* org.kosta.model..*Service.find*(..))" id="pt"/>
-	</aop:aspect>
+   <aop:aspect ref="timeLoggingService">
+      <!-- pointcut : aop 적용대상을 지정 -->
+      <aop:pointcut expression="execution(* org.kosta.model..*Service.find*(..))" id="pt"/>
+      <!-- advice : 공통기능(cross cutting concern)을 어느 시점에 적용하느냐를 지정 -->
+      <aop:before method="logging" pointcut-ref="pt"/>
+   </aop:aspect>
 </aop:config>
 </beans>
