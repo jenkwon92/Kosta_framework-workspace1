@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+<bean id="memberService" class="org.kosta.model.member.MemberServiceImpl"></bean>
+<bean id="productService" class="org.kosta.model.product.ProductServiceImpl"></bean>
+<!-- AOP 설정 -->
+<bean id="timeLoggingService" class="org.kosta.aop.common.TimeLoggingService"></bean>
+<aop:config>
+	<aop:aspect ref="timeLoggingService">
+		<!-- pointcut : aop 적용대상을 지정 -->
+		<aop:pointcut expression="execution(* org.kosta.model..*Service.find*(..))" id="pt"/>
+	</aop:aspect>
+</aop:config>
+</beans>

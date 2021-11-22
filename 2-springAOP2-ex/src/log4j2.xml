@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>        
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %-5p [%t] %C{10} (%F:%L) - %m%n" />
+        </Console>
+        <File name="file" fileName="report.log" append="true">
+            <PatternLayout pattern="%d %-5p [%t] %C{10} (%F:%L) - %m%n" />
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="console" />            
+        </Root>  
+        <!-- 	org.kosta.model.service 하위의 클래스들만
+        		별도로 log level을 debug로 지정한다
+         		additivity=false Root level의 logging 속성을 승계하지 않겠다
+         -->
+         <Logger name="org.kosta.model.service" level="debug" additivity="false">
+      	<AppenderRef ref="console"/>
+      	<AppenderRef ref="file"/>
+         </Logger>
+    </Loggers>
+</Configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
