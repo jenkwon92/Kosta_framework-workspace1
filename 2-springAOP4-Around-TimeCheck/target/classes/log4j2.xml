@@ -12,11 +12,11 @@
         <Root level="warn">
             <AppenderRef ref="console" />            
         </Root>   
-        <!-- org.kosta.aop.common 하위 패키지의 하위의 클래스들만
+        <!-- org.kosta.aop 하위 패키지의 하위의 클래스들만
         	  별도로 log level을 debug로 지정한다 
         	  additivity=false  Root level의 logging 속성을 승계하지 않겠다 
          -->       
-         <Logger name="org.kosta.aop.common" level="info" additivity="false">
+         <Logger name="org.kosta.aop" level="warn" additivity="false">
          <AppenderRef ref="console" /> 
          <AppenderRef ref="file" /> 
          </Logger>

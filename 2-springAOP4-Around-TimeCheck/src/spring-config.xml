@@ -6,5 +6,11 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 <bean id="boardService" class="org.kosta.model.board.BoardServiceImpl"></bean>
 <bean id="memberService" class="org.kosta.model.member.MemberServiceImpl"></bean>
-
+<!-- aop 설정 -->
+<bean id="reportService" class="org.kosta.aop.PerformanceReportService"></bean>
+<aop:config>
+	<aop:aspect ref="reportService">
+		<aop:around method="timeLogging" pointcut="bean(*Service)"/>
+	</aop:aspect>
+</aop:config>
 </beans>

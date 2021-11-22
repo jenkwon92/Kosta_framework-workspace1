@@ -20,6 +20,15 @@ public class TestPerformanceCheck {
 	  개발단계
 	  1. 로그  : Log4j -> 단위테스트
 	  2. 소요시간체크 : Spring Framework에서 제공하는 StopWatch util class를 이용 -> 단위 테스트 test.TestStopWatch
+	  3. 위의 1,2의 기능을 서비스 각 메서드에 직접 코딩을 하는 것이 아니라
+	  		AOP를 적용해서 효율적인 개발과 운영을 하도록 한다
+	  		Aspect (관점) -> Core Concern (회원 및 게시판 서비스의 각 메서드) -> 기존 시스템
+	  								Cross Cutting Concern (각 메서드의 실행 소요시간을 리포트) 
+	  								
+	  								1) Cross Cutting Concern 정의한 클래스를 구현
+	  								-> org.kosta.aop.PerformanceReportService timeLogging(ProceedingJoinPont)
+	 								2) AOP pointcut (적용대상을 지정) -> bean(*Service) :service 로 마치는 bean id 가 대상 
+	 									advice (공통기능 + 적용시점) ->around Advice 
 	 */
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext factory=new ClassPathXmlApplicationContext("spring-config.xml");
