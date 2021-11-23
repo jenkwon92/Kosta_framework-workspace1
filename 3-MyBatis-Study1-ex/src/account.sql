@@ -1,0 +1,12 @@
+SELECT * FROM account;
+
+DROP TABLE account;
+
+CREATE TABLE account(
+	id VARCHAR2(100) PRIMARY KEY,
+	name VARCHAR2(100) NOT NULL,
+	balance NUMBER NOT NULL
+)
+
+INSERT INTO account VALUES('1','아이유',1000);
+
