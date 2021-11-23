@@ -1,5 +1,8 @@
 package org.kosta.model.dao;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public void register(String productInfo) {
