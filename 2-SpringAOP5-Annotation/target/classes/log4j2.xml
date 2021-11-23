@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>        
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %-5p [%t] %C{10} (%F:%L) - %m%n" />
+        </Console>
+        <File name="file" fileName="report.log" append="true">
+            <PatternLayout pattern="%d %-5p [%t] %C{10} (%F:%L) - %m%n" />
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Root level="warn">
+            <AppenderRef ref="console" /> 
+            <AppenderRef ref="file" />           
+        </Root>  
+        <!-- 
+        		org.kosta.model.service 하위의 클래스들만 별도로 로깅 설정한다 
+        		level 은 debug 이상 로깅되도록 한다 
+        		additivitiy=false  root level의 로깅 정책을 승계하지 않겠다는 설정  
+         -->
+        <Logger name="org.kosta.aop" level="info" additivity="false">
+        	<AppenderRef ref="console" />
+        	<AppenderRef ref="file" />
+        </Logger>      
+    </Loggers>
+</Configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+<!-- 	<bean id="pointDAO" class="model.PointDAOImpl">
+		<constructor-arg ref="dbcp" />
+	</bean>
+	<bean id="memberDAO" class="model.MemberDAOImpl">
+		<constructor-arg ref="dbcp" />
+	</bean>
+	<bean id="memberService" class="model.MemberServiceImpl">
+		<constructor-arg ref="memberDAO" />
+		<constructor-arg ref="pointDAO" />
+	</bean> -->
+	<!-- apache dbcp -->
+	<bean id="dbcp" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+		<property name="username" value="scott" />
+		<property name="password" value="tiger" />
+	</bean>
+	<!-- annotation 기반 ioc di dl 설정 -->
+	<context:component-scan base-package="model"/>
+</beans>
