@@ -15,7 +15,7 @@ public class TestAOP {
 	 * ---> AOP 를 적용 (2-springAOP1-solution)
 	 * 
 	 * 1. Maven pom.xml에 aop 라이브러리 (aspectjweaver)
-	 * 2. 공통관심사 (횡단관심사 crss cutting concern) 로직을 정의: aop.common.LoggingService
+	 * 2. 공통관심사 (횡단관심사 cross cutting concern) 로직을 정의: aop.common.LoggingService
 	 * 3. AOP  설정(xml or annotation) 을 적용해서 Core Concern 에 Cross Cutting Concern을 적용 (weaving)
 	 * @param args
 	 */

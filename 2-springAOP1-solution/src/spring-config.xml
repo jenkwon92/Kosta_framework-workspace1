@@ -22,7 +22,7 @@
 		(..) : 0~* 매개변수
 	-->
 		<aop:pointcut expression="execution(public * model.*Service.find*(..))" id="pt"/>
-	<!-- advice : 어느 시점에 횡단괌심사를 적용할 것인가를 명시 -->
+	<!-- advice : 어느 시점에 횡단관심사를 적용할 것인가를 명시 -->
 		<aop:before method="findLogging" pointcut-ref="pt"/>
 	</aop:aspect>
 </aop:config>

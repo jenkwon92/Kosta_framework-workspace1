@@ -12,7 +12,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void registerMemberAndPoint(String memberInfo, String pointInfo) {
-		//트랜잭션 처리를 이후 공부 예쩡
+		//트랜잭션 처리를 이후 공부 예정
 		memberDAO.register(memberInfo);
 		pointDAO.register(pointInfo);
 	}

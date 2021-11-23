@@ -20,11 +20,11 @@ public class TestAOP {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
 		MemberService ms = (MemberService)ctx.getBean("memberService");
 		ProductService ps = (ProductService)ctx.getBean("productService");
-		ms.register("java 아이유 오리");
-		System.out.println(ms.findMemberById("spring"));
-		ps.deleteProductByNo(1);
-		System.out.println(ps.findProductByNo(11));
-		System.out.println(ps.findProductListByMaker("LG"));
+		ms.register("java 아이유 오리");  //java 아이유 오리회원정보등록
+		System.out.println(ms.findMemberById("spring")); //java 아이유 오리회원정보등록 spring 아이디에 대한 회원정보
+		ps.deleteProductByNo(1); //1 상품번호 상품 정보 삭제
+		System.out.println(ps.findProductByNo(11)); //**시스템 횡단 관심사(공통기능)** 11 상품번호 상품정보
+		System.out.println(ps.findProductListByMaker("LG")); //시스템횡단 관심사 [카스, 테라, 참이슬]
 		ctx.close();
 	}
 }

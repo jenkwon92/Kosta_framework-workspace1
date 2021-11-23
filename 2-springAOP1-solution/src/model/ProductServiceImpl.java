@@ -20,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ArrayList<String> findProductListByMaker(String maker) {
 		//아래 공통 or 횡단관심사 로직은 AOP로 처리
-				//System.out.println("**시스템 횡단 괌심사(공통기능)**");
+		//System.out.println("**시스템 횡단 괌심사(공통기능)**");
 		ArrayList<String> list = new ArrayList<String>();
 		list.add("카스");
 		list.add("테라");

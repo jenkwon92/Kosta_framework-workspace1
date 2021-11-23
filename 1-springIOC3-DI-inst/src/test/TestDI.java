@@ -12,4 +12,3 @@ public class TestDI {
 		factory.close();
 	}
 }
-// 12시 15분까지 휴식 

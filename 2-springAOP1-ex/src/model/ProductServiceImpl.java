@@ -12,13 +12,13 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public String findProductByNo(int no) {
-		System.out.println("**시스템 횡단 괌심사(공통기능)**");
+		System.out.println("**시스템 횡단 관심사(공통기능)**");
 		return no+"상품번호 상품정보";
 	}
 
 	@Override
 	public ArrayList<String> findProductListByMaker(String maker) {
-		System.out.println("**시스템 횡단 괌심사(공통기능)**");
+		System.out.println("**시스템 횡단 관심사(공통기능)**");
 		ArrayList<String> list = new ArrayList<String>();
 		list.add("카스");
 		list.add("테라");
