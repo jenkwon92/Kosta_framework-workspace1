@@ -18,6 +18,7 @@ SELECT COUNT(*) FROM spring_product;
 
 SELECT DISTINCT maker FROM spring_product;
 
+SELECT product_no,name,maker,price FROM spring_product WHERE maker='애플' AND price>30  ORDER BY product_no DESC
 
 
 

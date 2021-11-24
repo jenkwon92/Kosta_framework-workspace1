@@ -24,6 +24,15 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dbcp" />
 		<property name="typeAliasesPackage" value="org.kosta.model" />
+		<property name="configuration">
+		<!-- 
+			db column name의 underscore와 application instance variable name의 camelcase를 자동으로 연결
+			ex) 컬럼면 :  product_id 	변수명 : productId 이 자동 매핑
+		 -->
+			<bean class="org.apache.ibatis.session.Configuration">
+				<property name="mapUnderscoreToCamelCase" value="true"/>
+			</bean>
+		</property>
 	</bean>
 	<!-- 
 		SqlSessionTemplate : MyBatis 개발 생산성을 위해 사용하는 객체 (bean or component)

@@ -9,4 +9,8 @@ public interface ProductMapper {
 	public int getTotalProductCount();
 
 	public List<String> getMakerKindList();
+
+	public ProductVO findProdctByNo(int id);
+
+	public List<ProductVO> findProductListByMakerAndPrice(ProductVO paramVO);
 }

@@ -7,4 +7,18 @@
 	<select id="getMakerKindList" resultType="string">
 		SELECT DISTINCT maker FROM spring_product
 	</select>
+	<!-- 
+		컬럼명과 인스턴스변수명이 불일치할 때 방법
+		1. 아래와 같이 별칭을 인스턴스 변수명으로 주면 된다
+		2. spring mybatis 연동 서정에 undersocre와 camelCase 를 자동으로 연결하도록 정의
+	 -->
+	<!-- <select id="findProdctByNo" resultType="ProductVO" parameterType="int">
+		SELECT product_no as productNo,name,maker,price FROM spring_product WHERE product_no=#{value}
+	</select> -->
+	<select id="findProdctByNo" resultType="ProductVO" parameterType="int">
+		SELECT product_no as productNo,name,maker,price FROM spring_product WHERE product_no=#{value}
+	</select>
+	<select id="findProductListByMakerAndPrice" parameterType="ProductVO" resultType="ProductVO">
+		SELECT product_no,name,maker,price FROM spring_product WHERE maker=#{maker} AND price>#{price} ORDER BY product_no DESC
+	</select>
 </mapper>

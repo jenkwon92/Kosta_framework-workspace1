@@ -3,6 +3,7 @@ package test;
 import java.util.List;
 
 import org.kosta.model.ProductMapper;
+import org.kosta.model.ProductVO;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TestProductMapper {
@@ -12,10 +13,25 @@ public class TestProductMapper {
 		ProductMapper m= (ProductMapper) ctx.getBean("productMapper"); //소문자로된 interface 명이bean id 가됨
 		//System.out.println("총 상품수: "+m.getTotalProductCount());
 		//maker 종류 리스트를 조회
+		/*
 		List<String> makerList = m.getMakerKindList();
 		for(String maker:makerList) {
 			System.out.println(maker);
 		}
+		*/
+		/*
+		ProductVO vo  = (ProductVO)m.findProdctByNo(1);
+		System.out.println("상품검색: "+vo);
+		*/
+		
+		ProductVO paramVO = new ProductVO();
+		paramVO.setMaker("애플");
+		paramVO.setPrice(30);
+		//애플 maker의 price가 30을 초과하는 상품리스트를 product_no desc내림차순으로 조회
+		List<ProductVO> list = m.findProductListByMakerAndPrice(paramVO);
+		for(ProductVO vo :list)
+			System.out.println(vo);
+	
 		ctx.close();
 	}
 }
