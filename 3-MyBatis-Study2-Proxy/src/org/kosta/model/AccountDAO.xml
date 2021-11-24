@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @Mapper 어노테이션을 이용한 Proxy 를 이용하기 위해서는 
+	@Mapper가 명시된 인터페이스와 namespace의 패키지명 클래스명이 동일해야한다 
+	Mapper.xml의 파일명 또는 인터페이스명과 동일해야 한다
+	-->
+<mapper namespace="org.kosta.model.AccountDAO">
+	<sql id="selectAccount">
+		SELECT id,name,balance FROM account
+	</sql>
+	<select id="findAccountById" parameterType="string"
+		resultType="org.kosta.model.AccountVO">
+		SELECT id,name,balance FROM account WHERE id=#{value}
+	</select>
+	<select id="getAllAccountList" resultType="AccountVO">
+		SELECT id,name,balance FROM account
+	</select>
+	<insert id="registerAccount" parameterType="AccountVO">
+		INSERT INTO account(id,name,balance) VALUES(#{id},#{name},#{balance})
+	</insert>
+</mapper>

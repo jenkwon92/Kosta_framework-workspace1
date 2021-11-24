@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kosta.model.ProductMapper">
+	<select id="getTotalProductCount" resultType="int">
+		SELECT COUNT(*) FROM spring_product
+	</select>
+	<select id="getMakerKindList" resultType="string">
+		SELECT DISTINCT maker FROM spring_product
+	</select>
+</mapper>

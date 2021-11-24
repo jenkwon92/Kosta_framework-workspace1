@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<bean id="dbcp" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+		<property name="username" value="scott" />
+		<property name="password" value="tiger" />
+	</bean>
+	<!-- spring과 mybatis framework 연동설정 
+			SqlSessionFactoryBean : MyBatis의 주요 객체인 SqlSession 을 생성하는 Factory 역할을 하는 객체
+			dataSource : database connection pool을 setting
+			mapperLocation : sql을 정의하는 mapper.xml의 위치를 지정하여 로드가 되도록 설정
+			typeAliasesPackage :  mapper.xml에서 편리하게 vo or dto 를 사용하기 위해 별칭을 지정
+											org.kosta.model 이하의 클래스명이 별칭으로 된다 
+											resultType="org.kosta.model.AccountVO" ->resultType="AccountVO"
+	-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dbcp" />
+		<property name="typeAliasesPackage" value="org.kosta.model" />
+	</bean>
+	<!-- 
+		SqlSessionTemplate : MyBatis 개발 생산성을 위해 사용하는 객체 (bean or component)
+										반복적인 작업을 Template 에서 지원 ( openSession - close)
+										AOP 기반트랜잭션을 지원 (선언적 방식의 트랜잭션을 지원) -> 이후 공부예정
+										영속성 계층 (Persistence Layer) 에서 DI 방식으로 사용함 bean
+	 -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"/>
+	</bean> 
+	<!-- 
+		MyBatis Proxy를 위한 설정(DAO(Mapper) interface를 implements 한 구현 객체 -DAOImpl)
+		DAOImpl 구현체를 Framewok 차원으로 자동 생성 -@Mapper 어노테이션을 영속석 계층 인터페이스에 명시
+	 	org.kosta.model 이하의 @Mapper 가 명시된 인터페이스를 검색해 구현체를 생성한다
+	 -->
+	 <mybatis-spring:scan base-package="org.kosta.model"/>
+	 
+	<!--Annotation 기반 IOC (DI,DL) 을 위한 설정 -->
+	<context:component-scan base-package="org.kosta"/>
+
+
+</beans>

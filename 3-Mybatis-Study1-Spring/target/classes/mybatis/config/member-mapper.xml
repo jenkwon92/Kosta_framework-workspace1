@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+	<!-- 재사용을 위한 sql을 정의 -->
+	<sql id="selectMember">
+		SELECT id,password,name,address FROM mybatis_member
+	</sql>
+	<select id="findMemberById" parameterType="string" resultType="MemberVO">
+		<!-- SELECT id,password,name,address FROM mybatis_member WHERE id=#{value} -->
+		<include refid="selectMember"/> <!-- 중복줄이기위해 사용가능 -->
+			WHERE id=#{value}
+	</select>
+	<insert id="register">
+		INSERT INTO mybatis_member(id,password,name,address) VALUES(#{id},#{password},#{name},#{address})
+	</insert>
+	<select id="findMemberListByAddress" parameterType="string" resultType="MemberVO">
+		<include refid="selectMember"/>
+		WHERE address=#{value}
+	</select>
+	<select id="findMemberListByNameAndAddress" parameterType="MemberVO" resultType="MemberVO">
+		<include refid="selectMember"/>
+		WHERE name=#{name} AND address=#{address}
+	</select>
+	<update id="updateMember" parameterType="MemberVO">
+		UPDATE mybatis_member SET password=#{password},name=#{name},address=#{address}
+		WHERE id=#{id}
+	</update>
+	<delete id="deleteMemberById" parameterType="string">
+		DELETE FROM mybatis_member WHERE id=#{value}
+	</delete>
+	<select id="findMemberMapById" parameterType="string" resultType="map">
+		<include refid="selectMember"/>
+		WHERE id=#{value}
+	</select>
+</mapper>

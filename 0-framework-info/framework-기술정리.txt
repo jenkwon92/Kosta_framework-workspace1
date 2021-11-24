@@ -134,6 +134,11 @@ TRACE(가장 낮은 로그레벨)
 	--> org.kosta 패키지 및 하위 패키지의 컴포넌트 계열  어노테이션이 명시된 클래스를 탐색해서 bean 생성해 저장하고
 	DI 계열 어노테이션 명시된 대상에 대해 의존성 주입을 한다
 	
+	-MyBatis Framework
+	Java Persistence Framework
+	영속성 계층 프레임워크
+	자바 어플리케이션과 데이터베이스 연동시 반복적인 작업(Connection, PreparedStatement, ResultSet, close)을
+	프레임워크 차원에서 지원하여 생산성이 향상
 	
 	
 	
