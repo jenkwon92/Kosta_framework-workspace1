@@ -5,13 +5,7 @@ public class ProductVO {
 	private String name;
 	private String maker;
 	private int price;
-	public ProductVO(int productNo, String name, String maker, int price) {
-		super();
-		this.productNo = productNo;
-		this.name = name;
-		this.maker = maker;
-		this.price = price;
-	}
+
 	/*
 	 	MyBatis Framework를 사용해서 개발시에는 해당 클래스의 매개변수가 있는 생성자가 별도로 정의되어 있을때는
 	 	반드시 기본생성자(디폴트 생성자)를 명시해야 한다
@@ -19,7 +13,22 @@ public class ProductVO {
 	public ProductVO() {
 		super();
 	}
+	
+	public ProductVO(String name, String maker, int price) {
+		super();
+		this.name = name;
+		this.maker = maker;
+		this.price = price;
+	}
 
+	public ProductVO(int productNo, String name, String maker, int price) {
+		super();
+		this.productNo = productNo;
+		this.name = name;
+		this.maker = maker;
+		this.price = price;
+	}
+	
 	public int getProductNo() {
 		return productNo;
 	}

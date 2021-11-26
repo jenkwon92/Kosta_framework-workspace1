@@ -2,23 +2,69 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.kosta.model.ProductMapper">
 	<select id="getTotalProductCount" resultType="int">
-		SELECT COUNT(*) FROM spring_product
+		SELECT COUNT(*)
+		FROM spring_product
 	</select>
 	<select id="getMakerKindList" resultType="string">
-		SELECT DISTINCT maker FROM spring_product
+		SELECT DISTINCT maker
+		FROM spring_product
 	</select>
-	<!-- 
-		컬럼명과 인스턴스변수명이 불일치할 때 방법
-		1. 아래와 같이 별칭을 인스턴스 변수명으로 주면 된다
-		2. spring mybatis 연동 서정에 undersocre와 camelCase 를 자동으로 연결하도록 정의
-	 -->
-	<!-- <select id="findProdctByNo" resultType="ProductVO" parameterType="int">
-		SELECT product_no as productNo,name,maker,price FROM spring_product WHERE product_no=#{value}
-	</select> -->
-	<select id="findProdctByNo" resultType="ProductVO" parameterType="int">
-		SELECT product_no as productNo,name,maker,price FROM spring_product WHERE product_no=#{value}
+	<!-- 컬럼명과 인스턴스변수명이 불일치할 때 방법 1. 아래와 같이 별칭을 인스턴스 변수명으로 주면 된다 2. spring mybatis 
+		연동 시점에 undersocre와 camelCase 를 자동으로 연결하도록 정의 -->
+	<!-- <select id="findProdctByNo" resultType="ProductVO" parameterType="int"> 
+		SELECT product_no as productNo,name,maker,price FROM spring_product WHERE 
+		product_no=#{value} </select> -->
+	<sql id="selectProduct">
+		SELECT product_no as productNo,name,maker,price FROM
+		spring_product
+	</sql>
+	<select id="findProdctByNo" resultType="ProductVO"
+		parameterType="int">
+		<include refid="selectProduct" />
+		WHERE product_no=#{value}
 	</select>
-	<select id="findProductListByMakerAndPrice" parameterType="ProductVO" resultType="ProductVO">
-		SELECT product_no,name,maker,price FROM spring_product WHERE maker=#{maker} AND price>#{price} ORDER BY product_no DESC
+	<select id="findProductListByMakerAndPrice"
+		parameterType="ProductVO" resultType="ProductVO">
+		<include refid="selectProduct" />
+		WHERE maker=#{maker} AND price>#{price} ORDER BY
+		product_no DESC
+	</select>
+	<select id="findProductListLessThanPrice" parameterType="int"
+		resultType="ProductVO">
+		<include refid="selectProduct" />
+		<!-- CDATA Section : 해당 영역은 tag가 아니라 Character Data 임을 알린다 -->
+		<![CDATA[ 
+			WHERE price< #{value}
+		]]>
+	</select>
+	<select id="findProductListByLowPriceAndHighPrice"
+		parameterType="map" resultType="ProductVO">
+		<include refid="selectProduct" />
+		<!-- WHERE price BETWEEN #{LOWPRICE} AND #{HIGHPRICE} -->
+		<![CDATA[ 
+		WHERE price>#{LOWPRICE} AND price<#{HIGHPRICE}
+		]]>
+	</select>
+	<select id="findProductListLikeKeyword" parameterType="string"
+		resultType="ProductVO">
+		<include refid="selectProduct" />
+		WHERE name LIKE '%' ||#{value} ||'%'
+	</select>
+	<insert id="register" parameterType="ProductVO">
+		INSERT INTO
+		spring_product(product_no ,name,maker,price)
+		VALUES(spring_product_seq.NEXTVAL,#{name},#{maker},#{price})
+	</insert>
+	<insert id="registerVer2" parameterType="ProductVO">
+		INSERT INTO
+		spring_product(product_no ,name,maker,price)
+		VALUES(spring_product_seq.NEXTVAL,#{name},#{maker},#{price})
+		<selectKey keyProperty="productNo" resultType="int" order="AFTER">
+			SELECT spring_product_seq.currval FROM dual
+		</selectKey>
+	</insert>
+	<select id="getAllProductList" resultType="ProductVO">
+		<include refid="selectProduct" />
+		ORDER BY productNo DESC
 	</select>
 </mapper>
